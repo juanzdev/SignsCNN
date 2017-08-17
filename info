@@ -1,0 +1,395 @@
+hand detection, on closer hand image
+negative countour black and white hand
+train network with 1 channel
+
+
+
+
+
+
+2880
+withouth dropout
+Epoch 21 --- Training Accuracy:  93.0%, Validation Accuracy:  78.0%, Validation Loss: 0.674
+
+
+Epoch 21 --- Training Accuracy:  93.0%, Validation Accuracy:  70.0%, Validation Loss: 0.613
+
+
+total iterations:
+900
+Epoch 101 --- Training Accuracy: 100.0%, Validation Accuracy: 100.0%, Validation Loss: 0.005, Test Acc:  35.5%
+
+
+total iterations:
+600
+Epoch 31 --- Training Accuracy:  97.0%, Validation Accuracy:  96.0%, Validation Loss: 0.164, Test Acc:  57.1%
+Epoch 31 --- Training Accuracy:  98.0%, Validation Accuracy:  96.0%, Validation Loss: 0.156, Test Acc:  64.3%
+
+Epoch 32 --- Training Accuracy: 100.0%, Validation Accuracy:  96.0%, Validation Loss: 0.163, Test Acc:  64.3%
+Epoch 32 --- Training Accuracy:  99.0%, Validation Accuracy:  96.0%, Validation Loss: 0.172, Test Acc:  64.3%
+Epoch 33 --- Training Accuracy:  98.0%, Validation Accuracy:  96.0%, Validation Loss: 0.169, Test Acc:  64.3%
+Epoch 33 --- Training Accuracy:  99.0%, Validation Accuracy:  96.0%, Validation Loss: 0.163, Test Acc:  78.6%
+
+
+
+my_test_model_iteration_2930.data-00000-of-00001
+Epoch 147 --- Training Accuracy: 100.0%, Validation Accuracy:  98.0%, Validation Loss: 0.096, Test Acc:  85.7%
+saving snapshot...
+
+
+
+
+
+
+-----
+iteration 310 data
+Epoch 16 --- Training Accuracy:  97.0%, Validation Accuracy:  96.0%, Validation Loss: 0.137, Test Acc:  85.7%
+saving snapshot...
+7/14..... 85.7%??
+testing_data/A/*g
+[[ -17.75943184  -72.64676666  -69.39638519]
+ [  62.97402573  147.04919434    8.36233902]
+ [ -15.24559021  153.73008728   46.0830307 ]
+ [  18.83016396  109.4101944    50.7734375 ]]
+[0 1 1 1]
+
+testing_data/B/*g
+[[ -82.05284119  -55.74012756  -47.64968872]
+ [  67.42707062   85.50382233  105.40463257]
+ [ -48.08980942  166.47108459   53.59201813]
+ [ -49.30023193  233.29901123  235.91114807]
+ [ -51.61003494  230.63424683  -34.93371582]]
+[2 2 1 2 1]
+
+testing_data/C/*g
+[[ -87.56372833   68.08934784   48.22904587]
+ [  -4.74616194   89.71450806  249.30723572]
+ [ -50.83279037   35.46843719  139.12213135]
+ [ -39.41314697  -45.21056366  149.63275146]
+ [-152.43495178 -145.8802948    -1.75206423]]
+[1 2 2 2 2]
+
+
+
+
+
+original_data
+original_data_augmented
+<<<<<<< HEAD
+training_data
+
+
+
+
+
+
+TODO:
+train the net with grayscale samples
+test it
+improve video detection green rectangle is behaving weird
+get more training data
+
+
+
+Recomendations:
+background different from skin, avoid brownish or redish colors, 
+When posing on the camera wear sleves
+delete from training data complete arms with no sleeves
+for the data generation, generate pics where hand detection appears with black on center(black bcakground) and full white hand (white background)
+add, G word (tree fingers) (simbolo de perfecto), OK 
+add, i word (meñique) ok
+add, o word , rosquita
+add, v word , two fingers(simbolo paz)
+add, w word , three fingers
+add, y word , simbolo de groseria ( simbolo de amor)
+add, j word , meñiquie de lado
+add, l word, señal de l  ok
+=======
+training_data
+>>>>>>> 2d1983efab5d41a32c843341ef898c519009e1a2
+
+
+ISSUES, noche
+V y L se estan confundiendo
+C y G se confunden
+A no sale, siempre sale G
+
+
+
+-----
+
+ONE, trained on a day
+A , trained on day,
+B, trainied on day
+C, trained on day
+D(1) trained on day
+G trained on night, * TRAIN NOW(ok)
+Y trained on night, * TRAIN NOW-----
+2(V) trained on night, * TRAIN NOW(ok)
+3(W), *TRAIN NOW ok
+
+4, * pending
+Amor, * pending
+
+-----
+B (2400)
+C (2800)
+
+B y C se confunden
+la C esta coja (2800)
+ONE(D) no lo coge nunca
+el G se confunde con la C
+el V esta medio bien
+el Y no lo coge
+el W nunca lo coge
+
+
+
+------
+G y C se confunden, pero G casi nunca se predice, parece que falta data de G(6640)
+V nunca se activa(6384)
+Y nunca se activa(768)
+ONE nunca se activa(2928)
+W nunca se activa(fixed)
+---
+PARECE QUE HAY EXPLODING GRADIENTS... FALTA REGULARIZAR?
+WEIGHT INITIALIZATION?
+More training time?
+
+
+103 . 15
+
+907 chev
+
+
+av 15 no 103 90
+shoping 104
+
+
+-------------------
+CNN 1 
+detecta bien aveces
+tiene un problema parece ser de ruido especifico por el masking(el masking varia mucho)
+problemas de luz(debido al masking) se acentuan mucho, esto impacta la inferencia
+depende del hand detection, el hand detection no es tan preciso, muñecas y brazos se detectan y requeriria mas training. La cara la incluye, esto afecta la inferencia.(skin detection) 
+enproduccion, debemos aplicar el masking y  el hand detection
+ESPERAR A VER COMO VA CON DROPOUT
+SI NO ... ENTRENAR POR MAS TIEMPO...
+
+
+-------------------
+
+CNN 2
+el input tiene que ser 80% mano, posicionada desde el celular
+52X52 RESIZE
+histogram Equalization ( GRAYSCALE )
+ENTRENO
+(NECESITO VOLVER A GENERAR TODAS LAS IMAGENES DEL TRAINING ENFOCADAS EN EL 80% DE LA FOTO)
+
+---
+
+INPUT IMAGE unnormalized
+[[178 182 178 ..., 223 221 217]
+ [182 178 185 ..., 225 226 216]
+ [181 195 188 ..., 227 228 213]
+ ..., 
+ [179 180 171 ...,  16  15  17]
+ [180 179 167 ...,  23  22  24]
+ [177 176 164 ...,  32  29  30]]
+
+
+---
+
+training gray
+
+ Epoch 54 --- Training Accuracy:  98.0%, Validation Accuracy:  97.2%, Validation Loss: 0.471 , Test Accuracy:  85.9%
+
+
+
+
+----
+
+saving snapshot...
+total iterations:
+400
+Epoch 9 --- Training Accuracy:  99.6%, Validation Accuracy:  99.2%, Validation Loss: 0.040 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 9 --- Training Accuracy:  99.2%, Validation Accuracy:  98.0%, Validation Loss: 0.052 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 9 --- Training Accuracy:  99.2%, Validation Accuracy:  98.8%, Validation Loss: 0.034 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 10 --- Training Accuracy: 100.0%, Validation Accuracy:  99.2%, Validation Loss: 0.036 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 10 --- Training Accuracy:  99.6%, Validation Accuracy:  99.6%, Validation Loss: 0.049 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 10 --- Training Accuracy:  98.8%, Validation Accuracy:  98.4%, Validation Loss: 0.050 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 10 --- Training Accuracy: 100.0%, Validation Accuracy:  99.6%, Validation Loss: 0.030 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 11 --- Training Accuracy:  99.6%, Validation Accuracy:  98.4%, Validation Loss: 0.047 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 11 --- Training Accuracy:  99.6%, Validation Accuracy:  99.2%, Validation Loss: 0.036 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 11 --- Training Accuracy: 100.0%, Validation Accuracy:  99.6%, Validation Loss: 0.030 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 11 --- Training Accuracy:  99.2%, Validation Accuracy:  99.2%, Validation Loss: 0.031 , Test Accuracy:  83.3%
+saving snapshot...
+total iterations:
+500
+Epoch 11 --- Training Accuracy:  99.2%, Validation Accuracy:  99.2%, Validation Loss: 0.031 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 11 --- Training Accuracy:  99.2%, Validation Accuracy:  99.6%, Validation Loss: 0.031 , Test Accuracy:  83.3%
+saving snapshot...
+Epoch 12 --- Training Accuracy:  99.2%, Validation Accuracy:  98.8%, Validation Loss: 0.037 , Test Accuracy:  83.3%
+
+
+
+
+
+
+-------
+IMAGES 25 25 , DATA FROM COLOR AUGMENTATION
+FIRST TRAINING BEST RESULTS
+total iterations:
+2000
+Epoch 72 --- Training Accuracy: 100.0%, Validation Accuracy: 100.0%, Validation Loss: 6.541 , Test Accuracy:  66.7%
+Epoch 72 --- Training Accuracy: 100.0%, Validation Accuracy: 100.0%, Validation Loss: 6.433 , Test Accuracy:  70.0%
+Epoch 73 --- Training Accuracy: 100.0%, Validation Accuracy:  99.6%, Validation Loss: 6.331 , Test Accuracy:  66.7%
+Epoch 73 --- Training Accuracy: 100.0%, Validation Accuracy: 100.0%, Validation Loss: 6.225 , Test Accuracy:  70.0%
+Epoch 73 --- Training Accuracy: 100.0%, Validation Accuracy: 100.0%, Validation Loss: 6.118 , Test Accuracy:  66.7%
+Epoch 74 --- Training Accuracy: 100.0%, Validation Accuracy: 100.0%, Validation Loss: 6.018 , Test Accuracy:  66.7%
+
+
+------
+
+IMAGES 25 25 , DATA FROM COLOR AUGMENTATION + MORE DATA
+FIRST TRAINING BEST RESULTS
+saving snapshot...
+total iterations:
+1900
+Epoch 52 --- Training Accuracy:  98.8%, Validation Accuracy:  98.8%, Validation Loss: 11.453 , Test Accuracy:  86.7%
+saving snapshot...
+Epoch 52 --- Training Accuracy:  98.4%, Validation Accuracy:  98.0%, Validation Loss: 11.289 , Test Accuracy:  86.7%
+saving snapshot...
+Epoch 52 --- Training Accuracy:  99.2%, Validation Accuracy:  98.8%, Validation Loss: 11.143 , Test Accuracy:  90.0%
+saving snapshot...
+Epoch 53 --- Training Accuracy:  99.6%, Validation Accuracy:  99.2%, Validation Loss: 10.996 , Test Accuracy:  90.0%
+
+
+------
+IMAGES 25 25 , DATA FROM COLOR AUGMENTATION + MORE DATA + TF data augmentation
+FIRST TRAINING BEST RESULTS
+
+
+
+
+
+------
+regularization,weight_decay_l2_reg = 0.01
+
+step 3444 --- Training Accuracy:  99.6%, Validation Accuracy:  98.0%, Training Loss: 0.034,  Validation Loss: 0.058 , Test Accuracy:  86.1%
+step 3445 --- Training Accuracy: 100.0%, Validation Accuracy:  98.4%, Training Loss: 0.027,  Validation Loss: 0.040 , Test Accuracy:  88.9%
+saving snapshot...
+step 3446 --- Training Accuracy:  98.8%, Validation Accuracy:  98.4%, Training Loss: 0.042,  Validation Loss: 0.050 , Test Accuracy:  83.3%
+step 3447 --- Training Accuracy: 100.0%, Validation Accuracy:  99.6%, Training Loss: 0.033,  Validation Loss: 0.039 , Test Accuracy:  88.9%
+saving snapshot...
+step 3448 --- Training Accuracy:  99.6%, Validation Accuracy:  98.8%, Training Loss: 0.036,  Validation Loss: 0.056 , Test Accuracy:  88.9%
+saving snapshot...
+step 3449 --- Training Accuracy:  99.6%, Validation Accuracy:  98.4%, Training Loss: 0.041,  Validation Loss: 0.067 , Test Accuracy:  91.7%
+saving snapshot...
+step 3450 --- Training Accuracy:  99.2%, Validation Accuracy:  98.0%, Training Loss: 0.036,  Validation Loss: 0.079 , Test Accuracy:  91.7%
+saving snapshot...
+step 3451 --- Training Accuracy:  99.6%, Validation Accuracy:  99.6%, Training Loss: 0.033,  Validation Loss: 0.033 , Test Accuracy:  86.1%
+step 3452 --- Training Accuracy: 100.0%, Validation Accuracy:  98.0%, Training Loss: 0.025,  Validation Loss: 0.077 , Test Accuracy:  86.1%
+step 3453 --- Training Accuracy: 100.0%, Validation Accuracy:  98.8%, Training Loss: 0.027,  Validation Loss: 0.057 , Test Accuracy:  83.3%
+step 3454 --- Training Accuracy: 100.0%, Validation Accuracy:  99.6%, Training Loss: 0.027,  Validation Loss: 0.046 , Test Accuracy:  83.3%
+step 3455 --- Training Accuracy: 100.0%, Validation Accuracy:  98.8%, Training Loss: 0.027,  Validation Loss: 0.053 , Test Accuracy:  86.1%
+step 3456 --- Training Accuracy:  99.6%, Validation Accuracy:  98.8%, Training Loss: 0.029,  Validation Loss: 0.044 , Test Accuracy:  88.9%
+saving snapshot...
+step 3457 --- Training Accuracy: 100.0%, Validation Accuracy:  98.8%, Training Loss: 0.029,  Validation Loss: 0.040 , Test Accuracy:  91.7%
+saving snapshot...
+step 3458 --- Training Accuracy:  98.8%, Validation Accuracy:  98.8%, Training Loss: 0.053,  Validation Loss: 0.050 , Test Accuracy:  91.7%
+
+
+-----
+regularization,weight_decay_l2_reg = 0.5 (muy fuerte)
+step 1567 --- Training Accuracy:  43.3%, Validation Accuracy:  49.2%, Training Loss: 1.034,  Validation Loss: 1.020 , Test Accuracy:  41.7%
+step 1568 --- Training Accuracy:  47.2%, Validation Accuracy:  45.3%, Training Loss: 1.029,  Validation Loss: 1.036 , Test Accuracy:  41.7%
+step 1569 --- Training Accuracy:  50.0%, Validation Accuracy:  49.2%, Training Loss: 1.027,  Validation Loss: 1.032 , Test Accuracy:  36.1%
+step 1570 --- Training Accuracy:  45.7%, Validation Accuracy:  48.0%, Training Loss: 1.029,  Validation Loss: 1.019 , Test Accuracy:  41.7%
+step 1571 --- Training Accuracy:  45.3%, Validation Accuracy:  41.3%, Training Loss: 1.029,  Validation Loss: 1.047 , Test Accuracy:  41.7%
+step 1572 --- Training Accuracy:  47.6%, Validation Accuracy:  46.5%, Training Loss: 1.025,  Validation Loss: 1.029 , Test Accuracy:  41.7%
+step 1573 --- Training Accuracy:  44.9%, Validation Accuracy:  41.7%, Training Loss: 1.044,  Validation Loss: 1.036 , Test Accuracy:  41.7%
+step 1574 --- Training Accuracy:  43.3%, Validation Accuracy:  39.0%, Training Loss: 1.046,  Validation Loss: 1.044 , Test Accuracy:  36.1%
+step 1575 --- Training Accuracy:  44.9%, Validation Accuracy:  41.7%, Training Loss: 1.031,  Validation Loss: 1.041 , Test Accuracy:  36.1%
+step 1576 --- Training Accuracy:  46.5%, Validation Accuracy:  41.3%, Training Loss: 1.021,  Validation Loss: 1.032 , Test Accuracy:  36.1%
+step 1577 --- Training Accuracy:  39.0%, Validation Accuracy:  40.2%, Training Loss: 1.044,  Validation Loss: 1.045 , Test Accuracy:  36.1%
+step 1578 --- Training Accuracy:  44.1%, Validation Accuracy:  37.8%, Training Loss: 1.037,  Validation Loss: 1.045 , Test Accuracy:  38.9%
+step 1579 --- Training Accuracy:  43.7%, Validation Accuracy:  42.5%, Training Loss: 1.031,  Validation Loss: 1.049 , Test Accuracy:  38.9%
+
+
+
+------
+regularizacion,weight_decay_l2_reg = 0.1. (los weights de A se murieron y predice muy bien el G y V)
+
+
+step 3113 --- Training Accuracy:  93.7%, Validation Accuracy:  96.1%, Training Loss: 0.310,  Validation Loss: 0.268 , Test Accuracy:  91.7%
+saving snapshot...
+step 3114 --- Training Accuracy:  94.5%, Validation Accuracy:  89.0%, Training Loss: 0.303,  Validation Loss: 0.343 , Test Accuracy:  91.7%
+saving snapshot...
+step 3115 --- Training Accuracy:  93.3%, Validation Accuracy:  91.7%, Training Loss: 0.287,  Validation Loss: 0.337 , Test Accuracy:  83.3%
+step 3116 --- Training Accuracy:  88.2%, Validation Accuracy:  94.1%, Training Loss: 0.355,  Validation Loss: 0.310 , Test Accuracy:  83.3%
+step 3117 --- Training Accuracy:  90.6%, Validation Accuracy:  90.9%, Training Loss: 0.364,  Validation Loss: 0.314 , Test Accuracy:  83.3%
+step 3118 --- Training Accuracy:  91.3%, Validation Accuracy:  92.5%, Training Loss: 0.315,  Validation Loss: 0.291 , Test Accuracy:  91.7%
+saving snapshot...
+step 3119 --- Training Accuracy:  90.9%, Validation Accuracy:  91.3%, Training Loss: 0.322,  Validation Loss: 0.334 , Test Accuracy:  94.4%
+saving snapshot...
+step 3120 --- Training Accuracy:  90.6%, Validation Accuracy:  92.5%, Training Loss: 0.316,  Validation Loss: 0.323 , Test Accuracy:  94.4%
+saving snapshot...
+step 3121 --- Training Accuracy:  93.7%, Validation Accuracy:  94.5%, Training Loss: 0.332,  Validation Loss: 0.270 , Test Accuracy:  88.9%
+saving snapshot...
+step 3122 --- Training Accuracy:  93.7%, Validation Accuracy:  92.9%, Training Loss: 0.282,  Validation Loss: 0.330 , Test Accuracy:  83.3%
+step 3123 --- Training Accuracy:  91
+.
+.
+.
+nunca mas tuvo 91 7...
+
+step 8732 --- Training Accuracy:  86.2%, Validation Accuracy:  89.0%, Training Loss: 0.357,  Validation Loss: 0.360 , Test Accuracy:  80.6%
+step 8733 --- Training Accuracy:  90.6%, Validation Accuracy:  88.2%, Training Loss: 0.369,  Validation Loss: 0.381 , Test Accuracy:  80.6%
+step 8734 --- Training Accuracy:  89.0%, Validation Accuracy:  90.9%, Training Loss: 0.309,  Validation Loss: 0.286 , Test Accuracy:  80.6%
+step 8735 --- Training Accuracy:  90.6%, Validation Accuracy:  90.6%, Training Loss: 0.319,  Validation Loss: 0.329 , Test Accuracy:  83.3%
+step 8736 --- Training Accuracy:  90.9%, Validation Accuracy:  93.3%, Training Loss: 0.319,  Validation Loss: 0.290 , Test Accuracy:  80.6%
+step 8737 --- Training Accuracy:  91.7%, Validation Accuracy:  95.3%, Training Loss: 0.340,  Validation Loss: 0.278 , Test Accuracy:  83.3%
+step 8738 --- Training Accuracy:  94.1%, Validation Accuracy:  89.0%, Training Loss: 0.283,  Validation Loss: 0.332 , Test Accuracy:  77.8%
+step 8739 --- Training Accuracy:  89.4%, Validation Accuracy:  90.2%, Training Loss: 0.330,  Validation Loss: 0.351 , Test Accuracy:  77.8%
+step 8740 --- Training Accuracy:  91.3%, Validation Accuracy:  93.3%, Training Loss: 0.320,  Validation Loss: 0.302 , Test Accuracy:  80.6%
+step 8741 --- Training Accuracy:  90.9%, Validation Accuracy:  90.2%, Training Loss: 0.318,  Validation Loss: 0.312 , Test Accuracy:  80.6%
+step 8742 --- Training Accuracy:  90.2%, Validation Accuracy:  92.1%, Training Loss: 0.324,  Validation Loss: 0.282 , Test Accuracy:  77.8%
+step 8743 --- Training Accuracy:  92.9%, Validation Accuracy:  91.3%, Training Loss: 0.319,  Validation Loss: 0.317 , Test Accuracy:  77.8%
+step 8744 --- Training Accuracy:  89.8%, Validation Accuracy:  92.9%, Training Loss: 0.358,  Validation Loss: 0.313 , Test Accuracy:  83.3%
+step 8745 --- Training Accuracy:  89.0%, Validation Accuracy:  91.3%, Training Loss: 0.341,  Validation Loss: 0.268 , Test Accuracy:  80.6%
+step 8746 --- Training Accuracy:  89.4%, Validation Accuracy:  90.6%, Training Loss: 0.334,  Validation Loss: 0.321 , Test Accuracy:  80.6%
+step 8747 --- Training Accuracy:  90.2%, Validation Accuracy:  89.8%, Training Loss: 0.310,  Validation Loss: 0.313 , Test Accuracy:  80.6%
+step 8748 --- Training Accuracy:  92.5%, Validation Accuracy:  93.3%, Training Loss: 0.301,  Validation Loss: 0.299 , Test Accuracy:  77.8%
+step 8749 --- Training Accuracy:  94.9%, Validation Accuracy:  91.3%, Training Loss: 0.288,  Validation Loss: 0.322 , Test Accuracy:  80.6%
+step 8750 --- Training Accuracy:  94.1%, Validation Accuracy:  92.9%, Training Loss: 0.294,  Validation Loss: 0.312 , Test Accuracy:  77.8%
+step 8751 --- Training Accuracy:  92.1%, Validation Accuracy:  88.2%, Training Loss: 0.317,  Validation Loss: 0.351 , Test Accuracy:  77.8%
+step 8752 --- Training Accuracy:  90.6%, Validation Accuracy:  87.8%, Training Loss: 0.309,  Validation Loss: 0.375 , Test Accuracy:  80.6%
+step 8753 --- Training Accuracy:  89.0%, Validation Accuracy:  92.5%, Training Loss: 0.365,  Validation Loss: 0.293 , Test Accuracy:  77.8%
+step 8754 --- Training Accuracy:  91.3%, Validation Accuracy:  89.4%, Training Loss: 0.284,  Validation Loss: 0.323 , Test Accuracy:  80.6%
+step 8755 --- Training Accuracy:  90.9%, Validation Accuracy:  92.9%, Training Loss: 0.344,  Validation Loss: 0.281 , Test Accuracy:  80.6%
+step 8756 --- Training Accuracy:  90.6%, Validation Accuracy:  94.9%, Training Loss: 0.320,  Validation Loss: 0.270 , Test Accuracy:  77.8%
+step 8757 --- Training Accuracy:  90.9%, Validation Accuracy:  89.4%, Training Loss: 0.349,  Validation Loss: 0.338 , Test Accuracy:  80.6%
+step 8758 --- Training Accuracy:  91.3%, Validation Accuracy:  90.9%, Training Loss: 0.339,  Validation Loss: 0.341 , Test Accuracy:  77.8%
+step 8759 --- Training Accuracy:  91.3%, Validation Accuracy:  94.5%, Training Loss: 0.336,  Validation Loss: 0.304 , Test Accuracy:  80.6%
+step 8760 --- Training Accuracy:  91.3%, Validation Accuracy:  90.6%, Training Loss: 0.304,  Validation Loss: 0.316 , Test Accuracy:  80.6%
+step 8761 --- Training Accuracy:  86.2%, Validation Accuracy:  93.7%, Training Loss: 0.345,  Validation Loss: 0.292 , Test Accuracy:  77.8%
+step 8762 --- Training Accuracy:  90.6%, Validation Accuracy:  89.4%, Training Loss: 0.312,  Validation Loss: 0.336 , Test Accuracy:  80.6%
+step 8763 --- Training Accuracy:  92.9%, Validation Accuracy:  93.3%, Training Loss: 0.342,  Validation Loss: 0.299 , Test Accuracy:  80.6%
+step 8764 --- Training Accuracy:  90.2%, Validation Accuracy:  94.5%, Training Loss: 0.380,  Validation Loss: 0.265 , Test Accuracy:  80.6%
+step 8765 --- Training Accuracy:  92.5%, Validation Accuracy:  90.6%, Training Loss: 0.304,  Validation Loss: 0.327 , Test Accuracy:  80.6%
+step 8766 --- Training Accuracy:  92.9%, Validation Accuracy:  93.3%, Training Loss: 0.298,  Validation Loss: 0.317 , Test Accuracy:  80.6%
+
+
+
