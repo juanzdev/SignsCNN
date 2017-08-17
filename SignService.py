@@ -68,19 +68,19 @@ def index():
 # Route that will process the file upload
 @app.route('/api/sign/upload', methods=['POST'])
 def upload():
-    print("HOLA")
+    #print("HOLA")
     # Get the name of the uploaded file
     files = request.files.getlist("file[]")
     signs = {}
     #x = tf.placeholder(tf.float32, shape=[None, img_size_flat], name='x')
 
-    print(files)
+    #print(files)
     #input = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(None, img_size_flat)
     #output = convolutional(input)
     #return jsonify(results=[output])
     for file in files:
         print("loop")
-        print(file)
+        #print(file)
         # Check if the file is one of the allowed types/extensions
         if file and allowed_file(file.filename):
             # Make the filename safe, remove unsupported chars
@@ -89,7 +89,7 @@ def upload():
             image = cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.CV_LOAD_IMAGE_UNCHANGED)
             #image = cv2.imread(filename)
             print("IMAGE")
-            print(image)
+            #print(image)
 
             imgray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
             #sub_image = imgray[20:350, 25:195]
@@ -97,12 +97,12 @@ def upload():
             equ_resize = cv2.resize(equ,(img_size,img_size))
 
             images = []
-            print(equ_resize.shape)
+            #print(equ_resize.shape)
             images.append(equ_resize)
             images = np.array(images)
             train_batch_size = 1
             img_size_flat = img_size * img_size * num_channels
-            print(img_size_flat)
+            #print(img_size_flat)
             x_batch = images;
             x_batch = x_batch.reshape(train_batch_size, img_size_flat)
 
@@ -121,7 +121,7 @@ def upload():
             substract_output[0] = output2[1]
             substract_output[1] = output2[2]
             print(substract_output)
-            signs[filename] = output2
+            signs[filename] = substract_output.tolist()
             #return jsonify(results=[output1, output2])
 
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
