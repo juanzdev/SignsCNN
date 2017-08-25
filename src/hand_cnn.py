@@ -17,8 +17,8 @@ class HandCnn:
 
 	def __init__(self):
 		self.sess=tf.Session()    
-		self.saver = tf.train.import_meta_graph('../snapshots/snp_2390.meta')
-		self.saver.restore(self.sess,'../snapshots/snp_2390')
+		self.saver = tf.train.import_meta_graph('../snapshots/snp_4770.meta')
+		self.saver.restore(self.sess,'../snapshots/snp_4770')
 		self.graph = tf.get_default_graph()
 		self.x = self.graph.get_tensor_by_name("x:0")
 		self.y_conv = self.graph.get_tensor_by_name("y_conv:0")

@@ -12,7 +12,7 @@ import model
 num_channels = 1
 img_size = 28
 img_size_flat = img_size * img_size * num_channels
-classes = ['A','G','V']
+classes = ['G','V']
 num_classes = len(classes)
 batch_size = 254
 train_batch_size = batch_size
@@ -56,7 +56,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
 data = dataset.read_train_sets(train_path, img_size, classes, validation_size=validation_size)
 test_images = dataset.read_test_set(test_path, img_size,classes)
 xbatch_test = test_images.test._images
-xbatch_test = xbatch_test.reshape(36, img_size_flat)
+xbatch_test = xbatch_test.reshape(24, img_size_flat)
 
 print("Size of:")
 print("- Training-set:\t\t{}".format(len(data.train.labels)))

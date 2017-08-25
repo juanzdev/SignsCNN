@@ -16,14 +16,14 @@ import numpy as np
 import tensorflow as tf
 
 img_size = 28
-classes = ['A','G','V']
+classes = ['G','V']
 classes2 = ['G','V']
 def hand_letter(pred):
 	value = pred[0]
 	if value == 0:
-		return "A"
-	elif value==1:
 		return "G"
+	elif value==1:
+		return "V"
 	elif value==2:
 		return "V"
 	elif value==3:
@@ -61,7 +61,7 @@ with tf.variable_scope("convolutional"):
     print(x)
     y,y_conv,y_conv_cls,variables = model.convolutional(x, keep_prob)
 saver = tf.train.Saver(variables)
-saver.restore(sess, "../snapshots/snp_8624")
+saver.restore(sess, "../snapshots/snp_4770")
 
 def convolutional(input):
     return sess.run(y, feed_dict={x: input, keep_prob: 1.0}).flatten().tolist()
@@ -88,13 +88,13 @@ def show_frame():
 		x_batch = images;
 		x_batch = x_batch.reshape(train_batch_size, img_size_flat)
 		output2 = convolutional(x_batch)
-		substract_output = np.zeros(2)
-		substract_output[0] = output2[1]
-		substract_output[1] = output2[2]
+		#substract_output = np.zeros(2)
+		#substract_output[0] = output2[1]
+		#substract_output[1] = output2[2]
         #predictions,yconv,softmax = hand_cnn_instance.predict_single(equ_resize)
-		print(substract_output)
+		print(output2)
 		#print(softmax)
-		softmax_pred = substract_output
+		softmax_pred = output2
 		#cv2.putText(copy_frame, hand_letter(predictions),(100,100),cv2.FONT_HERSHEY_PLAIN,2.2,(0,0,0),0,2)
 		
 		#state vars

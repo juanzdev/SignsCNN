@@ -19,7 +19,7 @@ img_size = 28
 
 output_folder = "../original_data"
 target_train_label="G"
-classes = ['A','G','V']
+classes = ['G','V']
 
 cap = cv2.VideoCapture(0)
 cap.set(3,FRAMEWIDTH)

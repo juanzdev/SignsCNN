@@ -20,7 +20,7 @@ input_folder = "../original_data"
 output_folder_handregion ="../original_data_handregion"
 output_folder_augmented ="../original_data_augmented"
 output_folder_training ="../training_data"
-classes = ['A','G','V']
+classes = ['G','V']
 
 #purge data
 shutil.rmtree(output_folder_handregion)

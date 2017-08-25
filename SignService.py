@@ -25,7 +25,7 @@ with tf.variable_scope("convolutional"):
     print(x)
     y,y_conv,y_conv_cls,variables = model.convolutional(x, keep_prob)
 saver = tf.train.Saver(variables)
-saver.restore(sess, "snapshots/snp_8624")
+saver.restore(sess, "snapshots/snp_4770")
 
 def convolutional(input):
     return sess.run(y, feed_dict={x: input, keep_prob: 1.0}).flatten().tolist()
@@ -86,12 +86,13 @@ def upload():
             # Make the filename safe, remove unsupported chars
             filename = secure_filename(file.filename)
             print(filename)
-            image = cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.CV_LOAD_IMAGE_UNCHANGED)
+            #cv2.CV_LOAD_IMAGE_UNCHANGED -1
+            image = cv2.imdecode(np.fromstring(file.read(), np.uint8), -1)
             #image = cv2.imread(filename)
             print("IMAGE")
             #print(image)
-
-            imgray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+            #cv2.COLOR_BGR2GRAY 6
+            imgray = cv2.cvtColor(image,6)
             #sub_image = imgray[20:350, 25:195]
             equ = cv2.equalizeHist(imgray)
             equ_resize = cv2.resize(equ,(img_size,img_size))
@@ -117,11 +118,11 @@ def upload():
             # Here comes the logic neural network
             #input = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(1, 784)
             output2 = convolutional(x_batch)
-            substract_output = np.zeros(2)
-            substract_output[0] = output2[1]
-            substract_output[1] = output2[2]
-            print(substract_output)
-            signs[filename] = substract_output.tolist()
+            #substract_output = np.zeros(2)
+            #substract_output[0] = output2[1]
+            #substract_output[1] = output2[2]
+            print(output2)
+            signs[filename] = output2
             #return jsonify(results=[output1, output2])
 
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -187,7 +188,8 @@ def create_task():
 
 if __name__ == '__main__':
     app.run(
+        #host="localhost",
         host="0.0.0.0",
-        port=int("8080"),
-        debug=False
+        port=int("8081"),
+        debug=True
     )

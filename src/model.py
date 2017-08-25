@@ -4,7 +4,7 @@ num_channels = 1
 img_size = 28
 img_size_flat = img_size * img_size * num_channels
 alphaRelu=0.1
-classes = ['A','G','V']
+classes = ['G','V']
 num_classes = len(classes)
 weight_decay_l2_reg = 0.1
 # Multilayer Convolutional Network
