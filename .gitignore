@@ -1,0 +1,9 @@
+*.jpg
+*.jpeg
+*.png
+*.gif
+original_data/**/*.jpg
+original_data_augmented/**/*.jpg
+original_data_handregion/**/*.jpg
+testing_data/**/*.jpg
+training_data/**/*.jpg
